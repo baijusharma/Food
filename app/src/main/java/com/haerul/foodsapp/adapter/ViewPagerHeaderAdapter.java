@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.haerul.foodsapp.R;
+import com.haerul.foodsapp.model.Meal;
 import com.haerul.foodsapp.model.Meals;
 import com.squareup.picasso.Picasso;
 
@@ -23,11 +24,11 @@ import java.util.List;
 
 public class ViewPagerHeaderAdapter extends PagerAdapter {
 
-    private List<Meals.Meal> meals;
+    private List<Meal> meals;
     private Context context;
     private static ClickListener clickListener;
 
-    public ViewPagerHeaderAdapter(List<Meals.Meal> meals, Context context) {
+    public ViewPagerHeaderAdapter(List<Meal> meals, Context context) {
         this.meals = meals;
         this.context = context;
     }
@@ -72,7 +73,7 @@ public class ViewPagerHeaderAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-        container.removeView((View)object);
+        container.removeView((View) object);
     }
 
     public interface ClickListener {

@@ -7,13 +7,14 @@
 package com.haerul.foodsapp.view.home;
 
 import com.haerul.foodsapp.model.Categories;
+import com.haerul.foodsapp.model.Meal;
 import com.haerul.foodsapp.model.Meals;
 
 import java.util.List;
 
 public interface HomeView {
     /*
-     * TODO 13 Create void method
+     *
      *
      * The interface of this method will behave bridging between presenters to activities
      * then activity Overriding the interface
@@ -24,6 +25,14 @@ public interface HomeView {
      * 4. Displays Category data (with List parameters <Category> category) setCategories();
      * 5. and, Behavior when an error occurs when requesting data to the API
      */
-    // TODO 14 showLoading()
 
+    void showLoading();
+
+    void hideLoading();
+
+    void setMeal(List<Meal> meals);
+
+    void setCategory(List<Categories.Category> meals);
+
+    void onErrorLoading(String message);
 }
