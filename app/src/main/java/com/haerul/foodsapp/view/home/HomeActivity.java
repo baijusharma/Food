@@ -6,6 +6,7 @@
  -----------------------------------------------------------------------------*/
 package com.haerul.foodsapp.view.home;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -49,12 +50,13 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
     RecyclerView recyclerViewCategory;
     View shimmerMeal, shimmerCategory;
     HomePresenter presenter;
+    Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
+        mContext = this;
         initViews();
         /*
          *  TODO 34 bind the ButterKnife (2)
@@ -100,12 +102,19 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
         viewPagerMeal.setPadding(20, 0, 150, 0);
         headerAdapter.notifyDataSetChanged();
 
+        headerAdapter.setOnItemClickListener(new ViewPagerHeaderAdapter.ClickListener() {
+            @Override
+            public void onClick(View v, int position) {
+                Toast.makeText(mContext, meals.get(position).getStrCategory(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     @Override
-    public void setCategory(List<Categories.Category> meals) {
+    public void setCategory(List<Categories.Category> category) {
 
-        RecyclerViewHomeAdapter homeAdapter = new RecyclerViewHomeAdapter(meals, this);
+        RecyclerViewHomeAdapter homeAdapter = new RecyclerViewHomeAdapter(category, this);
         recyclerViewCategory.setAdapter(homeAdapter);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 3,
                 GridLayoutManager.VERTICAL, false);
@@ -113,12 +122,18 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
         recyclerViewCategory.setNestedScrollingEnabled(true);
         homeAdapter.notifyDataSetChanged();
 
+        homeAdapter.setOnItemClickListener(new RecyclerViewHomeAdapter.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Toast.makeText(mContext, category.get(position).getStrCategory(), Toast.LENGTH_SHORT).show();
 
+            }
+        });
     }
 
     @Override
     public void onErrorLoading(String message) {
-        Utils.showDialogMessage(this,"Title",message);
+        Utils.showDialogMessage(this, "Title", message);
     }
 
     // TODO 36 Overriding the interface
