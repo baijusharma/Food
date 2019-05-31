@@ -8,6 +8,7 @@ package com.haerul.foodsapp.view.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -24,6 +25,7 @@ import com.haerul.foodsapp.model.Meals;
 import com.haerul.foodsapp.view.category.CategoryActivity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -34,8 +36,10 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
     public static final String EXTRA_CATEGORY = "category";
     public static final String EXTRA_POSITION = "position";
 
-    @BindView(R.id.viewPagerHeader) ViewPager viewPagerMeal;
-    @BindView(R.id.recyclerCategory) RecyclerView recyclerViewCategory;
+    @BindView(R.id.viewPagerHeader)
+    ViewPager viewPagerMeal;
+    @BindView(R.id.recyclerCategory)
+    RecyclerView recyclerViewCategory;
 
     HomePresenter presenter;
 
@@ -85,11 +89,12 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
         homeAdapter.notifyDataSetChanged();
 
         homeAdapter.setOnItemClickListener((view, position) -> {
+            Toast.makeText(this, category.get(position).getStrCategory(), Toast.LENGTH_SHORT).show();
+
             Intent intent = new Intent(this, CategoryActivity.class);
-            //TODO 8. add extra data (put to intent)
-            /*intent.putExtra(EXTRA_CATEGORY, (Serializable) category);
-            intent.putExtra(EXTRA_POSITION, position);*/
-            //startActivity(intent);
+            intent.putParcelableArrayListExtra(EXTRA_CATEGORY, (ArrayList<? extends Parcelable>) category);
+            intent.putExtra(EXTRA_POSITION, position);
+            startActivity(intent);
         });
     }
 

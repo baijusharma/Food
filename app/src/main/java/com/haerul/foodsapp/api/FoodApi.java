@@ -21,5 +21,8 @@ public interface FoodApi {
     @GET("categories.php")
     Call<Categories> getCategories();
 
-    // TODO 14. add interface get meals by category
+    // https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood
+    @GET("filter.php")
+    Call<Meals> getMealByCategory(@Query("c") String category);
+
 }

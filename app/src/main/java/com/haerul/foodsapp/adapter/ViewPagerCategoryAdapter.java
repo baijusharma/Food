@@ -29,8 +29,11 @@ public class ViewPagerCategoryAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int i) {
         CategoryFragment fragment = new CategoryFragment();
+
         Bundle args = new Bundle();
-        //TODO 10. Add arguments to fragment
+        args.putString("EXTRA_DATA_NAME",categories.get(i).getStrCategory());
+        args.putString("EXTRA_DATA_DESC",categories.get(i).getStrCategoryDescription());
+        args.putString("EXTRA_DATA_IMAGE",categories.get(i).getStrCategoryThumb());
         fragment.setArguments(args);
         return fragment;
     }
