@@ -33,6 +33,10 @@
             android:screenOrientation="portrait"
             android:label="Category"/>
         <!--TODO #1 Add DetailActivity -->
+
+            <activity android:name=".view.detail.DetailActivity"
+                android:theme="@style/AppTheme.NoActionBar"
+                android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

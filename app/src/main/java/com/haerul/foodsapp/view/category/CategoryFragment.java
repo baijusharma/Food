@@ -6,6 +6,7 @@
  -----------------------------------------------------------------------------*/
 package com.haerul.foodsapp.view.category;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -25,6 +26,7 @@ import com.haerul.foodsapp.R;
 import com.haerul.foodsapp.Utils;
 import com.haerul.foodsapp.adapter.RecyclerViewMealByCategory;
 import com.haerul.foodsapp.model.Meals;
+import com.haerul.foodsapp.view.detail.DetailActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -47,6 +49,7 @@ public class CategoryFragment extends Fragment implements CategoryView {
     TextView textCategory;
     
     AlertDialog.Builder descDialog;
+    private String EXTRA_DETAIL;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -97,6 +100,10 @@ public class CategoryFragment extends Fragment implements CategoryView {
         adapter.notifyDataSetChanged();
         
         adapter.setOnItemClickListener((view, position) -> {
+            TextView mealName = view.findViewById(R.id.mealName);
+            Intent intent = new Intent(getActivity(), DetailActivity.class);
+            intent.putExtra(EXTRA_DETAIL, mealName.getText().toString());
+            startActivity(intent);
             //TODO #8.2 make an intent to DetailActivity (get the name of the meal from the edit text view, then send the name of the meal to DetailActivity)
         });
     }
